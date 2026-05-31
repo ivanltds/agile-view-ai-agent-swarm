@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Efficiency Report — MyProject / TeamAlpha</title>
+<style>
+  :root { --bg:#0f172a; --card:#1e293b; --ink:#e2e8f0; --muted:#94a3b8;
+          --accent:#6366f1; --good:#22c55e; --warn:#f59e0b; --bad:#ef4444; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+         background:var(--bg); color:var(--ink); line-height:1.5; }
+  header { padding:2rem 1.5rem; border-bottom:1px solid #334155; }
+  header h1 { margin:0 0 .25rem; font-size:1.5rem; }
+  header .sub { color:var(--muted); font-size:.9rem; }
+  main { max-width:1100px; margin:0 auto; padding:1.5rem; }
+  section { background:var(--card); border:1px solid #334155; border-radius:12px;
+            padding:1.25rem 1.5rem; margin-bottom:1.5rem; }
+  section h2 { margin-top:0; font-size:1.15rem; }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(160px,1fr)); gap:1rem; }
+  .kpi { background:#0b1220; border-radius:10px; padding:1rem; text-align:center; }
+  .kpi .val { font-size:1.6rem; font-weight:700; }
+  .kpi .label { color:var(--muted); font-size:.8rem; text-transform:uppercase; letter-spacing:.04em; }
+  table { width:100%; border-collapse:collapse; font-size:.9rem; }
+  th,td { text-align:left; padding:.5rem .6rem; border-bottom:1px solid #334155; }
+  th { color:var(--muted); font-weight:600; }
+  .pill { display:inline-block; padding:.1rem .5rem; border-radius:999px; font-size:.75rem; }
+  .pill.warn { background:rgba(245,158,11,.15); color:var(--warn); }
+  .pill.bad { background:rgba(239,68,68,.15); color:var(--bad); }
+  .grid2 { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:1.5rem; }
+  .trend.improving { color:var(--good); } .trend.declining { color:var(--bad); }
+  .trend.stable { color:var(--muted); }
+  .narrative { color:var(--muted); }
+  .unavailable { color:var(--warn); font-style:italic; }
+  canvas { max-height:300px; }
+  ul li { margin:.25rem 0; }
+  footer { text-align:center; color:var(--muted); font-size:.8rem; padding:2rem; }
+</style>
+</head>
+<body>
+<header>
+  <h1>MyProject — TeamAlpha</h1>
+  <div class="sub">
+    Organization acme · Generated 2026-05-15 00:00 ·
+    1 sprints · 3 work items
+  </div>
+</header>
+<main>
+
+  <section>
+    <h2>Executive summary</h2>
+    <div class="kpis">
+      <div class="kpi"><div class="val">15.0d</div><div class="label">Lead Time (avg)</div></div>
+      <div class="kpi"><div class="val">10.0d</div><div class="label">Cycle Time (avg)</div></div>
+      <div class="kpi"><div class="val">1.0</div><div class="label">Throughput / sprint</div></div>
+      <div class="kpi"><div class="val">33.3%</div><div class="label">Bug Rate</div></div>
+      <div class="kpi"><div class="val">0.0%</div><div class="label">Reopen Rate</div></div>
+      <div class="kpi"><div class="val">33.3%</div><div class="label">Unestimated</div></div>
+    </div>
+    <p class="narrative" style="margin-top:1rem">Team velocity is healthy given size.</p>
+  </section>
+
+  <div class="grid2">
+    <section>
+      <h2>Velocity <span class="trend stable">(stable)</span></h2>
+      <canvas id="velocity"></canvas>
+      
+      <p class="narrative">Delivery is consistent.</p>
+    </section>
+    <section>
+      <h2>Current sprint burndown</h2>
+      <canvas id="burndown"></canvas>
+      
+    </section>
+  </div>
+
+  <div class="grid2">
+    <section>
+      <h2>By type</h2>
+      <table><thead><tr><th>Type</th><th>Count</th></tr></thead><tbody>
+      <tr><td>UserStory</td><td>1</td></tr><tr><td>Bug</td><td>1</td></tr><tr><td>Task</td><td>1</td></tr>
+      </tbody></table>
+    </section>
+    <section>
+      <h2>By state</h2>
+      <table><thead><tr><th>State</th><th>Count</th></tr></thead><tbody>
+      <tr><td>Closed</td><td>1</td></tr><tr><td>Active</td><td>2</td></tr>
+      </tbody></table>
+    </section>
+  </div>
+
+  <section>
+    <h2>Team breakdown</h2>
+    <table><thead><tr><th>Member</th><th>Items</th><th>Story points</th></tr></thead><tbody>
+    <tr><td>Alice</td><td><built-in method items of dict object at 0x75cf57dda180></td><td>5.0</td></tr><tr><td>Bob</td><td><built-in method items of dict object at 0x75cf57dda200></td><td>3.0</td></tr>
+    </tbody></table>
+  </section>
+
+  <section>
+    <h2>At-risk items (2)</h2>
+    
+    <table><thead><tr><th>ID</th><th>Title</th><th>Type</th><th>Reason</th></tr></thead><tbody>
+    <tr><td>2</td><td>Crash</td><td>Bug</td>
+      <td><span class="pill bad">Blocked</span></td></tr><tr><td>3</td><td>Refactor</td><td>Task</td>
+      <td><span class="pill warn">No estimate</span></td></tr>
+    </tbody></table>
+    
+  </section>
+
+  <section>
+    <h2>Recommendations</h2>
+    <ul><li>Estimate all tasks.</li><li>Unblock bug #2.</li></ul>
+  </section>
+
+  
+
+</main>
+<footer>Generated by Azure Boards Agent Swarm</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
+<script>
+const velocityData = {"datasets": [{"data": [5.0], "label": "Delivered"}, {"data": [8.0], "label": "Planned"}], "labels": ["Sprint 1"]};
+const burndownData = {"datasets": [{"data": [8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 3.0, 3.0, 3.0, 3.0, 3.0], "label": "Remaining"}, {"data": [8.0, 7.4, 6.8, 6.2, 5.5, 4.9, 4.3, 3.7, 3.1, 2.5, 1.8, 1.2, 0.6, 0.0], "label": "Ideal"}], "labels": ["2026-05-01", "2026-05-02", "2026-05-03", "2026-05-04", "2026-05-05", "2026-05-06", "2026-05-07", "2026-05-08", "2026-05-09", "2026-05-10", "2026-05-11", "2026-05-12", "2026-05-13", "2026-05-14"]};
+function ready(){ return typeof Chart !== 'undefined'; }
+window.addEventListener('load', function(){
+  if(!ready()){
+    document.querySelectorAll('canvas').forEach(function(c){
+      const p=document.createElement('p'); p.className='unavailable';
+      p.textContent='Chart.js could not be loaded (offline). See CONTRIBUTING.md to bundle it.';
+      c.replaceWith(p);
+    });
+    return;
+  }
+  const palette=['#6366f1','#22c55e','#f59e0b','#ef4444'];
+  function colorize(d){ d.datasets.forEach((s,i)=>{ s.borderColor=palette[i%4]; s.backgroundColor=palette[i%4]+'55'; }); return d; }
+  if(velocityData.labels.length){
+    new Chart(document.getElementById('velocity'),{type:'bar',data:colorize(velocityData),
+      options:{responsive:true,plugins:{legend:{labels:{color:'#e2e8f0'}}},
+      scales:{x:{ticks:{color:'#94a3b8'}},y:{ticks:{color:'#94a3b8'}}}}});
+  }
+  if(burndownData.labels.length){
+    new Chart(document.getElementById('burndown'),{type:'line',data:colorize(burndownData),
+      options:{responsive:true,plugins:{legend:{labels:{color:'#e2e8f0'}}},
+      scales:{x:{ticks:{color:'#94a3b8'}},y:{ticks:{color:'#94a3b8'}}}}});
+  }
+});
+</script>
+</body>
+</html>
