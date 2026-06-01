@@ -1,23 +1,34 @@
 # Comece aqui 👋
 
-Este programa gera um **relatório de eficiência do time** a partir do Azure DevOps
-Boards. Você não precisa saber programar. Siga os 3 passos abaixo.
+Este programa gera um **relatório de eficiência do time** a partir do Azure DevOps Boards.
+Você não precisa saber programar. Siga os 3 passos abaixo.
 
 ---
 
 ## O que você precisa ter em mãos
 
-Antes de começar, tenha estas 4 informações (peça ao seu time técnico se não souber):
+Antes de começar, tenha estas informações (peça ao time técnico se não souber):
 
 | Informação | Onde encontrar |
 |---|---|
-| **Chave da Anthropic** (começa com `sk-ant-`) | Em console.anthropic.com → API Keys |
+| **Chave de IA** (veja opções abaixo) | Depende do provedor escolhido |
 | **Organização do Azure DevOps** | No endereço: `dev.azure.com/SUA-ORGANIZACAO` |
 | **Nome do projeto** | No menu do Azure DevOps |
 | **Nome do time** | Em Configurações do Projeto → Times |
 | **Token do Azure (PAT)** | Veja o passo "Criar o token" abaixo |
 
-> Guarde essas informações. O programa vai pedir cada uma delas.
+### Chave de IA — escolha um dos provedores
+
+Você pode usar **qualquer um** dos provedores abaixo:
+
+| Provedor | Como a chave começa | Onde obter |
+|---|---|---|
+| **Anthropic (Claude)** | `sk-ant-` | console.anthropic.com → API Keys |
+| **OpenAI (GPT)** | `sk-` | platform.openai.com → API Keys |
+| **DeepSeek** | qualquer | platform.deepseek.com → API Keys |
+| **Google Gemini** | `AIza` | aistudio.google.com → Get API Key |
+
+> O programa detecta o provedor automaticamente pela chave. Não é necessário configurar nada além de colar a chave.
 
 ---
 
@@ -79,6 +90,7 @@ abrir de novo quando quiser, é só dar dois cliques.
 | "401" ou "Unauthorized" | O token do Azure expirou ou está errado. Crie um novo. |
 | "404 — not found" | Confira se o nome do projeto/time está exatamente igual ao do Azure. |
 | O relatório abriu sem gráficos | Abra o arquivo com a internet conectada. |
+| "Unknown AI provider" | A chave de IA não foi reconhecida. Verifique se colou corretamente. |
 | Quero só testar se o acesso funciona | Dê dois cliques em **`TESTAR-CONEXAO.bat`**. |
 
 Se travar, chame alguém do time técnico e mostre a mensagem da janela preta.

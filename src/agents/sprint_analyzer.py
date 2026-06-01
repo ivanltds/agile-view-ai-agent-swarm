@@ -7,10 +7,9 @@ from __future__ import annotations
 
 from datetime import date, timedelta
 
-from anthropic import AsyncAnthropic
+from src.tools.ai_client import AIClient
 
 from src.agents.base import BaseAgent
-from src.config import CLAUDE_MODEL
 from src.models.schemas import (
     AnalyzedPayload,
     AnalyzedWorkItem,
@@ -26,7 +25,7 @@ class SprintAnalyzer(BaseAgent):
     name = "sprint_analyzer"
     description = "Computes velocity per sprint and current-sprint burndown."
 
-    def __init__(self, client: AsyncAnthropic) -> None:
+    def __init__(self, client: AIClient) -> None:
         self.client = client
 
     async def run(self, raw: RawPayload, analyzed: AnalyzedPayload) -> SprintPayload:
@@ -144,7 +143,7 @@ class SprintAnalyzer(BaseAgent):
         )
         try:
             resp = await self.client.messages.create(
-                model=CLAUDE_MODEL,
+                model=self.client.default_model,
                 max_tokens=300,
                 messages=[{"role": "user", "content": prompt}],
             )

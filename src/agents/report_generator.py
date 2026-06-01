@@ -7,10 +7,9 @@ from __future__ import annotations
 
 from collections import Counter, defaultdict
 
-from anthropic import AsyncAnthropic
+from src.tools.ai_client import AIClient
 
 from src.agents.base import BaseAgent
-from src.config import CLAUDE_MODEL
 from src.models.schemas import AggregatedPayload
 from src.tools.html_builder import render_report
 
@@ -19,7 +18,7 @@ class ReportGenerator(BaseAgent):
     name = "report_generator"
     description = "Builds the final HTML efficiency report."
 
-    def __init__(self, client: AsyncAnthropic) -> None:
+    def __init__(self, client: AIClient) -> None:
         self.client = client
 
     async def run(self, agg: AggregatedPayload) -> str:
@@ -117,7 +116,7 @@ class ReportGenerator(BaseAgent):
         )
         try:
             resp = await self.client.messages.create(
-                model=CLAUDE_MODEL,
+                model=self.client.default_model,
                 max_tokens=600,
                 messages=[{"role": "user", "content": prompt}],
             )

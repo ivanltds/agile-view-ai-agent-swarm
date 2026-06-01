@@ -7,10 +7,9 @@ from __future__ import annotations
 
 from datetime import datetime
 
-from anthropic import AsyncAnthropic
+from src.tools.ai_client import AIClient
 
 from src.agents.base import BaseAgent
-from src.config import CLAUDE_MODEL
 from src.models.schemas import (
     AnalyzedPayload,
     AnalyzedWorkItem,
@@ -47,7 +46,7 @@ class MetricsCalculator(BaseAgent):
     name = "metrics_calculator"
     description = "Computes Lead Time, Cycle Time, Throughput, Bug Rate, etc."
 
-    def __init__(self, client: AsyncAnthropic) -> None:
+    def __init__(self, client: AIClient) -> None:
         self.client = client
 
     async def run(self, raw: RawPayload, analyzed: AnalyzedPayload) -> MetricsPayload:
@@ -126,7 +125,7 @@ class MetricsCalculator(BaseAgent):
         )
         try:
             resp = await self.client.messages.create(
-                model=CLAUDE_MODEL,
+                model=self.client.default_model,
                 max_tokens=300,
                 messages=[{"role": "user", "content": prompt}],
             )

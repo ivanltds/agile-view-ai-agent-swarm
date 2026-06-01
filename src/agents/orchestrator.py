@@ -8,7 +8,7 @@ from __future__ import annotations
 import logging
 from datetime import datetime
 
-from anthropic import AsyncAnthropic
+from src.tools.ai_client import AIClient
 
 from src.agents.base import BaseAgent
 from src.agents.data_fetcher import DataFetcher, FetcherInput
@@ -35,7 +35,7 @@ class Orchestrator(BaseAgent):
     name = "orchestrator"
     description = "Coordinates the agent swarm end to end."
 
-    def __init__(self, anthropic: AsyncAnthropic, azure: "AzureClient") -> None:
+    def __init__(self, anthropic: AIClient, azure: "AzureClient") -> None:
         self.anthropic = anthropic
         self.azure = azure
 

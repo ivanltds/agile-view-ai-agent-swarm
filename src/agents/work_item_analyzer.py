@@ -7,10 +7,9 @@ from __future__ import annotations
 
 import json
 
-from anthropic import AsyncAnthropic
+from src.tools.ai_client import AIClient
 
 from src.agents.base import BaseAgent
-from src.config import CLAUDE_MODEL
 from src.models.schemas import (
     CANONICAL_STATES,
     AnalyzedPayload,
@@ -64,7 +63,7 @@ class WorkItemAnalyzer(BaseAgent):
     name = "work_item_analyzer"
     description = "Classifies work items into canonical types and states."
 
-    def __init__(self, client: AsyncAnthropic) -> None:
+    def __init__(self, client: AIClient) -> None:
         self.client = client
 
     async def run(self, raw: RawPayload) -> AnalyzedPayload:
@@ -96,7 +95,7 @@ class WorkItemAnalyzer(BaseAgent):
             return fallback
         try:
             resp = await self.client.messages.create(
-                model=CLAUDE_MODEL,
+                model=self.client.default_model,
                 max_tokens=500,
                 system=_SYSTEM,
                 messages=[
